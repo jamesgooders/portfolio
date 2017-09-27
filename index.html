@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,21 +14,17 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>		
 		(function ($) {
-
 			$.fn.downCount = function (options, callback) {
 				var settings = $.extend({
 						date: null,
 						offset: null
 					}, options);
-
 				if (!settings.date) {
 					$.error('Date is not defined.');
 				}
-
 				if (!Date.parse(settings.date)) {
 					$.error('Incorrect date format. It should look like this: 12/24/2018 12:00:00.');
 				}
-
 				var container = this;
 				 
 				var currentDate = function () {
@@ -36,44 +33,35 @@
 					var new_date = new Date(utc + (3600000 * settings.offset))
 					return new_date;
 				};
-
 				function countdown () {
 					var target_date = new Date(settings.date),
 						current_date = currentDate();
-
 					var difference = target_date - current_date;
-
 					if (difference < 0) {
 						clearInterval(interval);
 						if (callback && typeof callback === 'function') callback();
 						return;
 					}
-
 					var _second = 1000,
 					_minute = _second * 60,
 					_hour = _minute * 60,
 					_day = _hour * 24;
-
 					var days = Math.floor(difference / _day),
 					hours = Math.floor((difference % _day) / _hour),
 					minutes = Math.floor((difference % _hour) / _minute),
 					seconds = Math.floor((difference % _minute) / _second);
-
 					days = (String(days).length >= 2) ? days : '0' + days;
 					hours = (String(hours).length >= 2) ? hours : '0' + hours;
 					minutes = (String(minutes).length >= 2) ? minutes : '0' + minutes;
 					seconds = (String(seconds).length >= 2) ? seconds : '0' + seconds;
-
 					var ref_days = (days === 1) ? 'Day' : 'Days',
 					ref_hours = (hours === 1) ? 'Hour' : 'Hours',
 					ref_minutes = (minutes === 1) ? 'Minute' : 'Minutes',
 					ref_seconds = (seconds === 1) ? 'Second' : 'Seconds';
-
 					container.find('.days').text(days);
 					container.find('.hours').text(hours);
 					container.find('.minutes').text(minutes);
 					container.find('.seconds').text(seconds);
-
 					container.find('.days_ref').text(ref_days);
 					container.find('.hours_ref').text(ref_hours);
 					container.find('.minutes_ref').text(ref_minutes);
@@ -82,7 +70,6 @@
 		
 					var interval = setInterval(countdown, 1000);
 			};
-
 		})(jQuery);
 	</script>
 	<script>
@@ -103,7 +90,6 @@
 			margin: 0;
 			padding: 0;
 		}
-
 		#main {
 			max-width: 700px;
 			margin: 0 auto;
@@ -118,7 +104,6 @@
 			background-color: #ffffff;
 			border: 1px solid #000000;
 		}
-
 			.curtains {
 		background: url('https://files.internationalliving.com/images/ila/retirement-index/ILA-Retirement-Index-Collage-Lock.png') no-repeat center center fixed;
 		-webkit-background-size: cover;
@@ -131,17 +116,13 @@
 		  
 		
 	}
-
 	.curtain-text {
 		background: rgba(36,51,112, 0.5);
 		position: relative;
   		top: 50%;
   		transform: translateY(-50%);
-
 	}
-
 		/* --- General --- */
-
 		h1, h2, h3 {
 			text-align: center;
 			font-weight: bold;
@@ -167,7 +148,6 @@
 			font-size: 1.5em;
 			color: #000000;
 		}
-
 		p {
 			margin-bottom: 1em;
 		}
@@ -203,7 +183,6 @@
 		.underline {
 			text-decoration: underline;
 		}
-
 		.highlight {
 			background-color: #ffff00;
 		}
@@ -211,11 +190,9 @@
 		.center {
 			text-align: center;
 		}
-
 		.responsive-line {
 			display: block;
 		}
-
 		/* --- Budget Table --- */
 		
 		#budget-table {
@@ -248,10 +225,17 @@
 		{
 			border-bottom: 1px solid #8badcc;
 		}
-
 		#budget-table tr:nth-child(13) td:first-child {
 			text-align: right;
 		}
+
+		#link {
+			color: #232f3e;
+		}
+
+		#link:hover { 
+    		color: #3366cc;
+		}		
 		
 		/* --- Starburst Image --- */
 		
@@ -259,7 +243,6 @@
 			float: right;
 			margin-left: 5px;
 		}
-
 		.testimonial, .large-box {
 		    width: 90%;
 		    margin: 15px auto;
@@ -271,25 +254,21 @@
 		    border-radius: 4px;
 		    padding: 0 10px;
 		}
-
 		.testimonial-headline {
 		    text-align: center;
 		    font-weight: bold;
 		}
-
 		.testimonial-name, .sidebar-name {
 		    text-align: right;
 		    font-weight: bold;
 		}
-
 		/* --- Sidebars --- */
 		
 		.sidebar {
-			width: 45%; 
-			 margin: 15px auto;
+			width: 40%; 
+			 margin: 10px auto;
 		    border: 1px solid #060;
-		    border-style: dashed;
-		    background-color: #FFF9EB;
+		    
 		    -moz-border-radius: 4px;
 		    -webkit-border-radius: 4px;
 		    border-radius: 4px;
@@ -300,7 +279,7 @@
 		
 		.sidebar img {
 			display: block;
-			margin: 10px auto 10px auto;
+			margin: 5px auto 5px auto;
 			max-width: 100%;            
 			-moz-border-radius: 4px; 
 			-webkit-border-radius: 4px; 
@@ -321,7 +300,6 @@
 			font-weight: bold; 
 			text-align: center;
 		}
-
 		  /* --- Starburst/Cover Image --- */
 		
 		 #starburst, .cover-image {
@@ -329,50 +307,8 @@
 		   margin-left: 5px;
 		}
 		
-		/* --- Order Button --- */
-
-		a:link {color:#FFFFFF;} /* unvisited link */
-		a:visited {color:#FFFFFF;} /* visited link */
-		a:hover {color:#FFFFFF;} /* mouse over link */
-		a:active {color:#FFFFFF;} /* selected link */ 
-
-		.order-button {
-			-moz-box-shadow: inset 0px 1px 0px 0px #f5978e;
-			-webkit-box-shadow: inset 0px 1px 0px 0px #f5978e;
-			box-shadow: inset 0px 1px 0px 0px #f5978e;
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f) );
-			background:-moz-linear-gradient(center top, #f24537 5%, #c62d1f 100% );
-			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f');
-			background-color: #f24537;
-			-webkit-border-radius: 6px;
-			-moz-border-radius: 6px;
-			border-radius: 6px;
-			text-indent: 0px;
-			border: 2px solid #d02718;
-			display: inline-block;
-			color: #ffffff;
-			text-shadow: 2px 2px 3px #000;
-			font-size: 2em;
-			font-weight: bold;
-			font-style: normal;
-			line-height: 2.1em;
-			padding: 5px 15px;
-			text-decoration: none;
-			text-align: center;
-			text-shadow: 1px 1px 0px #810e05;
-			white-space: normal;
-			margin: 10px auto 15px auto;
-		}
-
-		.order-button:hover {
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537));
-			background: -moz-linear-gradient(center top, #c62d1f 5%, #f24537 100%);
-			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537');
-			background-color: #c62d1f;
-		}
 
 		/* --- Media Queries --- */
-
 		@media  (max-width: 700px) {
 			body {
 				background-color: #ffffff;
@@ -383,7 +319,6 @@
 				box-shadow: none;
 				border: none;
 			}
-
 			.sidebar {
 				display: block !important;
 				width: 90% !important;
@@ -397,7 +332,6 @@
 			#budget-table td:nth-child(2) {  
 				white-space: normal;
 			}
-
 			.responsive-line {
 				display: inline;
 			}
@@ -416,7 +350,6 @@
 				margin: 5px auto;
 			}
 		}
-
 		ul.countdown {
 			list-style: none;
 			margin: 5px 0;
@@ -425,11 +358,9 @@
 			text-align: center;
 			color: white;
 		}
-
 		ul.countdown li {
 			display: inline-block;
 		}
-
 		ul.countdown li span {
 			font-size: 2em;
 			font-weight: 900;
@@ -438,11 +369,9 @@
 			font-weight: bold;
 			text-shadow: 2px 2px black;
 		}
-
 		ul.countdown li.seperator {
 			width: 30px;
 		}
-
 		ul.countdown li p {
 			color: white;
 			font-size: 1.5em;
@@ -450,8 +379,6 @@
 			font-weight: bold;
 			text-shadow: 2px 2px black;
 		}
-
-
 		@media (max-width: 642px) {
 				
 				img {
@@ -459,42 +386,33 @@
 				}
 			
 			}
-
 		@media (max-width: 605px) {
 			ul.countdown li p {
 				font-size: 1.5em;
 			}
-
 			ul.countdown li span {
 				font-size: 1.5em;
 			}
-
 			.curtain-text {
 				padding-top: 25px;
 			}
-
 			h2 {
 				font-size: 3em;
 			}
-
 			img {
 				width: 200px;
 			}
 		}
-
 		@media only screen and (max-width: 500px) {
 		    h1 {
 		        font-size: 3em;
 		    }
-
 		    h2 {
 		        font-size: 2em;
 		    }
-
 		    h3 {
 		        font-size: 1.4em;
 		    }
-
 		    ul.countdown {
 		    	margin-left: 5px;
 		    }
@@ -523,13 +441,9 @@
 
 	
 	<div class="curtain-text"">
-
 	<img src="https://files.internationalliving.com/images/ila/retirement-index/ila-logo-inverted.png" style="display: block; margin-left: auto; margin-right: auto; max-width: 50%; padding-top: 20px;" align="center">
-
-
 	<h2 style="color: white; margin-top: 1em; margin-bottom: 1em;">Stay Tuned for <span class="responsive-line"><em>International Living Australia</em>'s</span> 2018 Global Retirement Rankings</h2>
 	
-
 		<ul class="countdown">
 			<li>
 				<span class="days"></span>
@@ -551,104 +465,152 @@
 				<p class="seconds_ref" style="margin-top: 0;">Seconds</p>
 			</li>
 		</ul>
-
 	</div>
 	
 	</div>
-
 	<hr>
-
-	<h2><a href="https://desmondcu.ie/" target="_blank" style="color: #232f3e;">Desmond Credit Union</h2></a>
-
+	<h2><a href="https://desmondcu.ie/" target="_blank" id="link">Desmond Credit Union</h2></a>
+		
+		<h2><a href="https://www.waterfordcu.ie/" target="_blank" id="link">Waterford Credit Union</h2></a>
 		<hr>
-
-		<h2><a href="https://www.waterfordcu.ie/" target="_blank" style="color: #232f3e;">Waterford Credit Union</h2></a>
-
-		<hr>
-
 	<h1>Video</h1>
-
 		<hr>
-
 		<h2>Premier Pro, After Effects, Live Streaming</h2>
-
 		<hr>
-
 		<iframe width="700" height="400" src="https://www.youtube.com/embed/oP4JFhTj-L4" frameborder="0" allowfullscreen style="max-width: 100%;"></iframe>
-
 		<hr>
-
 	<h1>Design</h1>
-
 		<hr>
-
 		<h2>Photoshop</h2>
-
 		<hr>
-
 		<img src="https://github.com/jamesgooders/portfolio/blob/master/(RETA)%20Siempre%20Playa%20Deal%20OD%20Graphic.jpg?raw=true" style="max-width: 100%; margin-left: auto: margin-right: auto;" align="center" width="700px">
-
 		<hr>
-
 		<h1>Contact</h1>
-
 		<hr>
-
 		<div class="sidebar sidebar-right">
-
 		<img src="james good.jpg">
 		
-
 	</div>
-
 		
 	<p><strong>Address:</strong> Bishop's Rock, Coxtown, Dunmore East, Co. Waterford, Ireland</p>
 	<p><strong>Phone:</strong> 0877634236	
 	<p><strong>Skype:</strong> @jamesgooders</p>
-	<p><strong>Email:</strong> <a href="mailto:james.good@webinnovate.ie?Subject=James%20Good's%20Portfolio" target="_top">james.good@webinnovate.ie</a></p>	
-	<p><strong>GitHub:</strong> <a href="https://github.com/jamesgooders" target="_blank">jamesgooders</a></p>
-	<p><strong>Twitter:</strong> <a href="https://twitter.com/jamesgooders" target="_blank">@jamesgooders</a></p>
+	<p><strong>Email:</strong> <a href="mailto:james.good@webinnovate.ie?Subject=James%20Good's%20Portfolio" target="_top" id="link">james.good@webinnovate.ie</a></p>	
+	<p><strong>GitHub:</strong> <a href="https://github.com/jamesgooders" id="link" target="_blank">jamesgooders</a></p>
+	<p><strong>Twitter:</strong> <a href="https://twitter.com/jamesgooders" id="link" target="_blank">@jamesgooders</a></p>
+	<hr>
+	<h1>Profile</h1>
+	<hr>	
+	<p>I graduated with first class honours in digital design, technology and innovation from Dulbin Institute of Technology in 2015, having spent the previous 10 years working in the broadcasting industry in Ireland and the UK.  My strenghts lie in front end web development, video editing and photoshop. </p>
+	<hr>
+	<h1>Career History</h1>
+	<hr>
+	<h2>International Living: April 2016 - Present</h2>
+	<hr>
+	<h3 style="text-align: left;">Web Developer</h3>
+	<h3>Responsibilities</h3>
+	<ul>
+		<li>Front and back end development of promos</li>
+		<li>Conference Livestreaming</li>
+		<li>Video promo filming and editing</li>
+		<li>Order device image designs</li>
+
+	</ul>
+	<h3>Achievements</h3>
+
+	<p>Produced and directed the first two conference live streams in Panama and Costa Rica which generated $120,000 in unique sales.</p>
 
 	<hr>
 
-	<h1>Profile</h1>
+	<h2>Passion for Creative: Aug 2015 - April 2016</h2>
+	<hr>
+	<h3 style="text-align: left;">Web Developer</h3>
+	<h3>Responsibilities</h3>
+	<ul>
+		<li>Wordpress and Concrete 5 CMS Development</li>
+	</ul>
+
+	<h3>Achievements</h3>
+
+	<ul>
+
+	<li>Developed a javascript loan calculator used accross the portfolio of financial accounts.</li>
+
+	</ul>
+
+	<hr>
+
+	<h2>Big Red Cloud: Feb 2015 - Aug 2016</h2>
+	<hr>
+	<h3 style="text-align: left;">App Developer</h3>
+	<h3>Responsibilities</h3>
+	<ul>
+		<li>Worked using Agile management methodologies, scrums and sprint meetings.</li>
+
+		<li>Front and back end development of an accounting mobile app.</li>
+	</ul>
+
+	<h3>Tools Utilised</h3>
+
+	<ul>
+		<li>Ionic Software Development Framework</li>
+		<li>HTML5, CSS, SASS, Javascript
+		Angular.js, Cordova and REST APIs</li>
+
+	</ul>	
+
+	<hr>
+
+	<h2>Education & Training</h2>
+	<hr>
+	<h3 style="text-align: left;">Dublin Institute of Technology <br>Oct 2014 – Aug 2015</h3>
+	<p>BSC Hons in Digital Technology, Design and Innovation</p>
+	<hr>
+
+	<h3 style="text-align: left;">London Metropolitan University<br>	Sep 2000 – Aug 2003</h3>
+	<p>BA in Communications and Broadcasting</p>
+	<hr>
+
+	<h2>Other Training/Skills</h2>
+	<hr>
+
+	<ul>
+		<li>Final Cut Pro and Avid Editing programs.</li> 
+		<li>FAS certificate in Desktop Publishing (1999 – 2000)</li>
+		<li>BBC Production Safety</li>
+		<li>Spanish, German and Irish at a conversational level</li>
+		<li>HTML5, CSS, SASS, Javascript, PHP, JQuery, XML, MVC, Angular.js, Ionic and Cordova</li>
+		<li>I have undertaken charity work with the Simon Community and the TAMAR project for endangered turtles in Brazil</li>
+
+	</ul>
+
+	<h2>Interests</h2>
+	<hr>
+
+	<div class="sidebar sidebar-left">
+		<img src="james good.jpg">
+		
+	</div>
+	<p>All sports both as a participant and spectator.</p> 
+
+	<p>I play tennis, squash, football, golf and I have completed a number of triathlons.</p> 
+
+	<p>I also have a keen interest in travel, music and reading.</p> 
+
+
+	<div style="clear: both;">
+
+		<hr>
+
+	<h2>References available on request</h2>
+
+</div>
 
 	<hr>	
 
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-	<hr>
-
-	<h1>Career History</h1>
-
-	<hr>
-
-	<h2>International Living: April 2016 - Present</h2>
-
-	<h3>Web Developer</h3>
-
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-
-	<hr>
-
-
-
-
-
-
-
-
-
-
-
-
-		
 		
 	</div>
 </body>
 </html>
+
