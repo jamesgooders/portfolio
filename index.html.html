@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="expires" content="now" />
+	<meta content="noindex, nofollow" name="robots">
+	<title></title>
+
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700|Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script>		
+		(function ($) {
+
+			$.fn.downCount = function (options, callback) {
+				var settings = $.extend({
+						date: null,
+						offset: null
+					}, options);
+
+				if (!settings.date) {
+					$.error('Date is not defined.');
+				}
+
+				if (!Date.parse(settings.date)) {
+					$.error('Incorrect date format. It should look like this: 12/24/2018 12:00:00.');
+				}
+
+				var container = this;
+				 
+				var currentDate = function () {
+					var date = new Date();
+					var utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+					var new_date = new Date(utc + (3600000 * settings.offset))
+					return new_date;
+				};
+
+				function countdown () {
+					var target_date = new Date(settings.date),
+						current_date = currentDate();
+
+					var difference = target_date - current_date;
+
+					if (difference < 0) {
+						clearInterval(interval);
+						if (callback && typeof callback === 'function') callback();
+						return;
+					}
+
+					var _second = 1000,
+					_minute = _second * 60,
+					_hour = _minute * 60,
+					_day = _hour * 24;
+
+					var days = Math.floor(difference / _day),
+					hours = Math.floor((difference % _day) / _hour),
+					minutes = Math.floor((difference % _hour) / _minute),
+					seconds = Math.floor((difference % _minute) / _second);
+
+					days = (String(days).length >= 2) ? days : '0' + days;
+					hours = (String(hours).length >= 2) ? hours : '0' + hours;
+					minutes = (String(minutes).length >= 2) ? minutes : '0' + minutes;
+					seconds = (String(seconds).length >= 2) ? seconds : '0' + seconds;
+
+					var ref_days = (days === 1) ? 'Day' : 'Days',
+					ref_hours = (hours === 1) ? 'Hour' : 'Hours',
+					ref_minutes = (minutes === 1) ? 'Minute' : 'Minutes',
+					ref_seconds = (seconds === 1) ? 'Second' : 'Seconds';
+
+					container.find('.days').text(days);
+					container.find('.hours').text(hours);
+					container.find('.minutes').text(minutes);
+					container.find('.seconds').text(seconds);
+
+					container.find('.days_ref').text(ref_days);
+					container.find('.hours_ref').text(ref_hours);
+					container.find('.minutes_ref').text(ref_minutes);
+					container.find('.seconds_ref').text(ref_seconds);
+				};
+		
+					var interval = setInterval(countdown, 1000);
+			};
+
+		})(jQuery);
+	</script>
+	<script>
+		$(document).ready(function() {	 		
+			$('.countdown').downCount({
+				date: '07/27/2018 06:00:00',
+				offset: +10
+			}, function () {
+				window.location = '';
+			});
+		});
+	</script>
+	<style>	
+		@import url(https://fonts.googleapis.com/css?family=Lato:700|Oswald|Open+Sans: 300, 300i, 700, 700i);
+		
+		body {
+			background-color: #232f3e;
+			margin: 0;
+			padding: 0;
+		}
+
+		#main {
+			max-width: 700px;
+			margin: 0 auto;
+			word-wrap: break-word;
+			font-family:'Open Sans', sans-serif;
+			font-weight: 300;
+			color: #000000;
+			font-size: 1.3em;
+			line-height: 1.4em;
+			text-align: left;
+			padding: 25px;
+			background-color: #ffffff;
+			border: 1px solid #000000;
+		}
+
+			.curtains {
+		background: url('https://files.internationalliving.com/images/ila/retirement-index/ILA-Retirement-Index-Collage-Lock.png') no-repeat center center fixed;
+		-webkit-background-size: cover;
+		  -moz-background-size: cover;
+		  -o-background-size: cover;
+		  background-size: cover;
+		  background-position: center;
+		  width: 100%;
+		  height: 600px;
+		  
+		
+	}
+
+	.curtain-text {
+		background: rgba(36,51,112, 0.5);
+		position: relative;
+  		top: 50%;
+  		transform: translateY(-50%);
+
+	}
+
+		/* --- General --- */
+
+		h1, h2, h3 {
+			text-align: center;
+			font-weight: bold;
+			margin-top: 0;
+			margin-bottom: 10px;
+			line-height: 1.2em;
+		}
+		
+		h1 {
+			font-size: 4em;
+			line-height: 1.2;
+			color: #000000;
+			font-family: Oswald, 'Arial Black', 'sans serif';
+		}
+		
+		h2 {
+			font-size: 1.6em;
+			margin: 5px auto 10px auto;
+			color: #000000;
+		}
+		
+		h3 {
+			font-size: 1.5em;
+			color: #000000;
+		}
+
+		p {
+			margin-bottom: 1em;
+		}
+		
+		.bigp {
+			font-size: 1.1em;
+		}
+		
+		li {
+			margin-bottom: 10px;
+		}
+		
+		.red {
+			color: #ff0000;
+		}
+		
+		.dark-red {
+			color: #a60a0a;
+		}
+		
+		.blue {
+			color: #3366cc;
+		}
+		
+		.bold {
+			font-weight: bold;
+		}
+		
+		.italic {
+			font-style: italic
+		}
+		
+		.underline {
+			text-decoration: underline;
+		}
+
+		.highlight {
+			background-color: #ffff00;
+		}
+		
+		.center {
+			text-align: center;
+		}
+
+		.responsive-line {
+			display: block;
+		}
+
+		/* --- Budget Table --- */
+		
+		#budget-table {
+			border-collapse: collapse;
+			max-width: 90%; 
+			margin: 15px auto;
+			border: 1px #8badcc solid; 
+			background-color: #ddeffe; 
+			color: #003399; 
+			-moz-border-radius: 4px; 
+			-webkit-border-radius: 4px; 
+			border-radius: 4px;
+			padding: 0 10px;
+			font-weight: bold;
+		}
+		
+		#budget-table td {
+			padding: 2px 15px;
+		}
+		
+		#budget-table td:nth-child(2) {  
+			white-space: nowrap;
+		}
+		
+		#budget-table td + td {
+			text-align: right;
+		}
+		
+		#budget-table tr:nth-child(12) td
+		{
+			border-bottom: 1px solid #8badcc;
+		}
+
+		#budget-table tr:nth-child(13) td:first-child {
+			text-align: right;
+		}
+		
+		/* --- Starburst Image --- */
+		
+		#starburst {
+			float: right;
+			margin-left: 5px;
+		}
+
+		.testimonial, .large-box {
+		    width: 90%;
+		    margin: 15px auto;
+		    border: 1px solid #060;
+		    border-style: dashed;
+		    background-color: #FFF9EB;
+		    -moz-border-radius: 4px;
+		    -webkit-border-radius: 4px;
+		    border-radius: 4px;
+		    padding: 0 10px;
+		}
+
+		.testimonial-headline {
+		    text-align: center;
+		    font-weight: bold;
+		}
+
+		.testimonial-name, .sidebar-name {
+		    text-align: right;
+		    font-weight: bold;
+		}
+
+		/* --- Sidebars --- */
+		
+		.sidebar {
+			width: 45%; 
+			 margin: 15px auto;
+		    border: 1px solid #060;
+		    border-style: dashed;
+		    background-color: #FFF9EB;
+		    -moz-border-radius: 4px;
+		    -webkit-border-radius: 4px;
+		    border-radius: 4px;
+		    padding: 0 10px;
+			float: right; 
+			margin-left: 10px;
+		}
+		
+		.sidebar img {
+			display: block;
+			margin: 10px auto 10px auto;
+			max-width: 100%;            
+			-moz-border-radius: 4px; 
+			-webkit-border-radius: 4px; 
+			border-radius: 4px;
+		}
+		
+		.sidebar-right {
+			float: right; 
+			margin-left: 10px; 
+		}
+		
+		.sidebar-left {
+			float: left; 
+			margin-right: 10px; 
+		}
+		
+		.sidebar-headline {
+			font-weight: bold; 
+			text-align: center;
+		}
+
+		  /* --- Starburst/Cover Image --- */
+		
+		 #starburst, .cover-image {
+		   float: right;
+		   margin-left: 5px;
+		}
+		
+		/* --- Order Button --- */
+
+		a:link {color:#FFFFFF;} /* unvisited link */
+		a:visited {color:#FFFFFF;} /* visited link */
+		a:hover {color:#FFFFFF;} /* mouse over link */
+		a:active {color:#FFFFFF;} /* selected link */ 
+
+		.order-button {
+			-moz-box-shadow: inset 0px 1px 0px 0px #f5978e;
+			-webkit-box-shadow: inset 0px 1px 0px 0px #f5978e;
+			box-shadow: inset 0px 1px 0px 0px #f5978e;
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f) );
+			background:-moz-linear-gradient(center top, #f24537 5%, #c62d1f 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f');
+			background-color: #f24537;
+			-webkit-border-radius: 6px;
+			-moz-border-radius: 6px;
+			border-radius: 6px;
+			text-indent: 0px;
+			border: 2px solid #d02718;
+			display: inline-block;
+			color: #ffffff;
+			text-shadow: 2px 2px 3px #000;
+			font-size: 2em;
+			font-weight: bold;
+			font-style: normal;
+			line-height: 2.1em;
+			padding: 5px 15px;
+			text-decoration: none;
+			text-align: center;
+			text-shadow: 1px 1px 0px #810e05;
+			white-space: normal;
+			margin: 10px auto 15px auto;
+		}
+
+		.order-button:hover {
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537));
+			background: -moz-linear-gradient(center top, #c62d1f 5%, #f24537 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537');
+			background-color: #c62d1f;
+		}
+
+		/* --- Media Queries --- */
+
+		@media  (max-width: 700px) {
+			body {
+				background-color: #ffffff;
+			}
+			
+			#main {
+				width: 90%;
+				box-shadow: none;
+				border: none;
+			}
+
+			.sidebar {
+				display: block !important;
+				width: 90% !important;
+			}
+			
+			.sidebar-left, .sidebar-right  {
+				margin: 0 auto;
+				float: none;
+			}
+			
+			#budget-table td:nth-child(2) {  
+				white-space: normal;
+			}
+
+			.responsive-line {
+				display: inline;
+			}
+						
+			.order-button {
+				max-width: 95%;
+				font-size: 1em;
+				line-height: 1.5em;
+			}
+		}
+		
+		@media (max-width: 500px) {
+			#starburst {
+				display: block;
+				float: none;
+				margin: 5px auto;
+			}
+		}
+
+		ul.countdown {
+			list-style: none;
+			margin: 5px 0;
+			padding: 0;
+			display: block;
+			text-align: center;
+			color: white;
+		}
+
+		ul.countdown li {
+			display: inline-block;
+		}
+
+		ul.countdown li span {
+			font-size: 2em;
+			font-weight: 900;
+			line-height: 1em;
+			font-family: Oswald, 'Arial Black', 'sans serif';
+			font-weight: bold;
+			text-shadow: 2px 2px black;
+		}
+
+		ul.countdown li.seperator {
+			width: 30px;
+		}
+
+		ul.countdown li p {
+			color: white;
+			font-size: 1.5em;
+			font-family: Oswald, 'Arial Black', 'sans serif';
+			font-weight: bold;
+			text-shadow: 2px 2px black;
+		}
+
+
+		@media (max-width: 642px) {
+				
+				img {
+					width: 150px;
+				}
+			
+			}
+
+		@media (max-width: 605px) {
+			ul.countdown li p {
+				font-size: 1.5em;
+			}
+
+			ul.countdown li span {
+				font-size: 1.5em;
+			}
+
+			.curtain-text {
+				padding-top: 25px;
+			}
+
+			h2 {
+				font-size: 3em;
+			}
+
+			img {
+				width: 200px;
+			}
+		}
+
+		@media only screen and (max-width: 500px) {
+		    h1 {
+		        font-size: 3em;
+		    }
+
+		    h2 {
+		        font-size: 2em;
+		    }
+
+		    h3 {
+		        font-size: 1.4em;
+		    }
+
+		    ul.countdown {
+		    	margin-left: 5px;
+		    }
+		}
+	</style>
+</head>
+
+<body>
+	<div id="main">
+	
+		<h1><span style="font-size: 1.5em;">{</span> james.good <span style="font-size: 1.5em;">}</span></h1>
+
+		<h2>Portfolio</h2>
+
+		<hr>
+
+		<h1>Web</h1>
+
+		<hr>
+
+		<h2>HTML, CSS, Javascript, PHP, Wordpress</h2>
+
+		<hr>
+
+		<div class="curtains">
+
+	
+	<div class="curtain-text"">
+
+	<img src="https://files.internationalliving.com/images/ila/retirement-index/ila-logo-inverted.png" style="display: block; margin-left: auto; margin-right: auto; max-width: 50%; padding-top: 20px;" align="center">
+
+
+	<h2 style="color: white; margin-top: 1em; margin-bottom: 1em;">Stay Tuned for <span class="responsive-line"><em>International Living Australia</em>'s</span> 2018 Global Retirement Rankings</h2>
+	
+
+		<ul class="countdown">
+			<li>
+				<span class="days"></span>
+				<p class="days_ref" style="margin-top: 0;">Days</p>
+			</li>
+			<li class="seperator"></li>
+			<li>
+				<span class="hours"></span>
+				<p class="hours_ref" style="margin-top: 0;">Hours</p>
+			</li>
+			<li class="seperator"></li>
+			<li>
+				<span class="minutes"></span>
+				<p class="minutes_ref" style="margin-top: 0;">Minutes</p>
+			</li>
+			<li class="seperator"></li>
+			<li>
+				<span class="seconds"></span>
+				<p class="seconds_ref" style="margin-top: 0;">Seconds</p>
+			</li>
+		</ul>
+
+	</div>
+	
+	</div>
+
+	<hr>
+
+	<h2><a href="https://desmondcu.ie/" target="_blank" style="color: #232f3e;">Desmond Credit Union</h2></a>
+
+		<hr>
+
+		<h2><a href="https://www.waterfordcu.ie/" target="_blank" style="color: #232f3e;">Waterford Credit Union</h2></a>
+
+		<hr>
+
+	<h1>Video</h1>
+
+		<hr>
+
+		<h2>Premier Pro, After Effects, Live Streaming</h2>
+
+		<hr>
+
+		<iframe width="700" height="400" src="https://www.youtube.com/embed/oP4JFhTj-L4" frameborder="0" allowfullscreen style="max-width: 100%;"></iframe>
+
+		<hr>
+
+	<h1>Design</h1>
+
+		<hr>
+
+		<h2>Photoshop</h2>
+
+		<hr>
+
+		<img src="https://github.com/jamesgooders/portfolio/blob/master/(RETA)%20Siempre%20Playa%20Deal%20OD%20Graphic.jpg?raw=true" style="max-width: 100%; margin-left: auto: margin-right: auto;" align="center" width="700px">
+
+		<hr>
+
+		<h1>Contact</h1>
+
+		<hr>
+
+		<div class="sidebar sidebar-right">
+
+		<img src="james good.jpg">
+		
+
+	</div>
+
+		
+	<p><strong>Address:</strong> Bishop's Rock, Coxtown, Dunmore East, Co. Waterford, Ireland</p>
+	<p><strong>Phone:</strong> 0877634236	
+	<p><strong>Skype:</strong> @jamesgooders</p>
+	<p><strong>Email:</strong> <a href="mailto:james.good@webinnovate.ie?Subject=James%20Good's%20Portfolio" target="_top">james.good@webinnovate.ie</a></p>	
+	<p><strong>GitHub:</strong> <a href="https://github.com/jamesgooders" target="_blank">jamesgooders</a></p>
+	<p><strong>Twitter:</strong> <a href="https://twitter.com/jamesgooders" target="_blank">@jamesgooders</a></p>
+
+	<hr>
+
+	<h1>Profile</h1>
+
+	<hr>	
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	<hr>
+
+	<h1>Career History</h1>
+
+	<hr>
+
+	<h2>International Living: April 2016 - Present</h2>
+
+	<h3>Web Developer</h3>
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+
+	<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+	</div>
+</body>
+</html>
